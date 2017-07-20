@@ -11,7 +11,12 @@ firebase.initializeApp(config);
 
 // Get the element
 var dbRefComment = firebase.database().ref('comments/').child('comment');
+var dbRefRecipe = firebase.database().ref('step/');
+var dbRefStep = firebase.database().ref().child('current_step');
+var no = document.getElementById("no");
 var com = document.getElementById("comments");
+var cont = document.getElementById("content");
+var image = document.getElementById("image");
 
 function getInput(){
   //pass the value to database
@@ -29,3 +34,19 @@ $('#send').click(function(){
   getInput();
 });
 
+// Refresh Step
+dbRefStep.on('value', function (snapchat) {
+  no.innerText = snapchat.val();
+  var dbRefRecipeContent = firebase.database().ref('step/step_'+snapchat.val()).child('content');
+  dbRefRecipeContent.on('value', snap => cont.innerText = snap.val());
+  var dbRefRecipeImg = firebase.database().ref('step/step_'+snapchat.val()).child('img');
+  dbRefRecipeImg.on('value', snap => image.setAttribute("src", snap.val()));
+});
+
+
+
+$('#example-text-input').keypress(function (e) {
+  code = (e.keyCode? e.keyCode : e.which);
+  if(code == 13)
+    getInput();
+})
