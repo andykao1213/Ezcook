@@ -18,20 +18,70 @@ var com = document.getElementById("comments");
 var cont = document.getElementById("content");
 var image = document.getElementById("image");
 
+/*generate comment on video*/
+var colors = ['#2C3E50', '#FF0000', '#1E87F0', '#7AC84B', '#FF7F700', '#9B39F4', '#FF69B4'];
 function getInput(){
   //pass the value to database
+  var newComment = dbRefComment.push();
   var input = $('#example-text-input').val();
-  dbRefComment.set(input);
-  
+  //console.log(newComment);
+  newComment.set({
+    content: input
+  });
+  //console.log(newComment.key);
   // Clear the input
   $('#example-text-input').val("");
+
+ // addBarage(input);
+}
+timer = setInterval(move, 25);
+function move(){
+  var arr = [];
+  var oSpan = document.getElementsByTagName('span');
+  for(var i=0; i<oSpan.length; i++){
+    arr.push(oSpan[i].offsetLeft);
+    arr[i] -= 2;
+    oSpan[i].style.left = arr[i] + 'px';
+    if(arr[i] < -oSpan[i].offsetWidth){
+      var dmDom = document.getElementById('dm');
+      dmDom.removeChild(dmDom.childNodes[0]);
+    }
+  }
+}
+
+function addBarage(input){
+  // add barage
+  //clearInterval(timer);
+  var index = parseInt(Math.random() * 7);
+  var screenW = 560;
+  var screenH = 100;
+  var max = Math.floor(screenH / 40);
+  var height = 40 + 40 * (parseInt(Math.random() * (max+1)) - 1);
+  var span = document.createElement('span');
+  span.style.left = screenW + 'px';
+  span.style.top = height + 'px';
+  span.style.color = colors[index];
+  span.innerHTML = input;
+  var dmDom = document.getElementById('dm');
+  dmDom.appendChild(span);
 }
 
 // Refresh the comments
-dbRefComment.on('value', snap => com.innerText = snap.val());
+dbRefComment.on('child_added', function (snapchat) {
+  //com.innerHTML += '<p class="subtitle">'+snapchat.val()+'</p>';
+  var input = snapchat.val().content;
+  addBarage(input);
+});
 
+// get user input
 $('#send').click(function(){
   getInput();
+});
+$('#example-text-input').keypress(function (e) {
+  code = (e.keyCode? e.keyCode : e.which);
+  if(code == 13){
+    getInput();
+  }
 });
 
 // Refresh Step
@@ -42,11 +92,3 @@ dbRefStep.on('value', function (snapchat) {
   var dbRefRecipeImg = firebase.database().ref('step/step_'+snapchat.val()).child('img');
   dbRefRecipeImg.on('value', snap => image.setAttribute("src", snap.val()));
 });
-
-
-
-$('#example-text-input').keypress(function (e) {
-  code = (e.keyCode? e.keyCode : e.which);
-  if(code == 13)
-    getInput();
-})
