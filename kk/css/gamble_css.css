@@ -29,3 +29,17 @@
 .form-control {
     margin: auto;
 }
+
+.gm button{
+    background-color: #f44336; 
+    border: 1px solid black; 
+    color: white; 
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    width: 55%; /* Set a width if needed */
+    display: block; /* Make the buttons appear below each other */
+    margin: auto;
+}
+.gm button:hover {
+    background-color: #da190b;
+}
