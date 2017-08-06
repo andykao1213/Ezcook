@@ -1,34 +1,48 @@
 *{
     /*border: 1px solid black;*/
+    position: relative;
+}
+
+body{
+    background-color: #f3f3f3;
 }
 
 .block{
-    width: 560px;
-    height: 100px;
+    width: 13000px;
+    height: 150px;
     position: absolute;
     background-color: rgba(0, 0, 0, 0); 
     color: rgba(255, 255, 255, 1);
     /*border: 1px solid black;*/
     overflow: hidden;
+    z-index: 1;
 }
 
 .tmp{
-    position: relative;
+    left: 7%;
+    display: inline-block;
+    margin-top: 10px;
 }
 
 #dm span{
     position: absolute;
+    font-family: 微軟正黑體;
+    font-size: 25px; 
 }
 
-/*animation on video player*/
-.subtitle{
-    animation: ani_1 12s linear;
-    position: relative;
+.recepie, .contents, .pic{
     display: inline-block;
-    left: 100%;
 }
 
-@keyframes ani_1{
-    0%{left: 100%}
-    100%{left: -100%}
+#content{
+    font-family: 微軟正黑體;
+    font-size: 30px;
+    text-align: center;
 }
+
+#no{
+     font-family: 微軟正黑體;
+    font-size: 30px;
+    margin-left: 40%;
+}
+

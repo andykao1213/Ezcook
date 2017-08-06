@@ -18,6 +18,8 @@ var com = document.getElementById("comments");
 var cont = document.getElementById("content");
 var image = document.getElementById("image");
 
+console.log('fuck');
+
 /*generate comment on video*/
 var colors = ['#2C3E50', '#FF0000', '#1E87F0', '#7AC84B', '#FF7F700', '#9B39F4', '#FF69B4'];
 function getInput(){
@@ -53,23 +55,26 @@ function addBarage(input){
   // add barage
   //clearInterval(timer);
   var index = parseInt(Math.random() * 7);
-  var screenW = 560;
-  var screenH = 100;
+  var screenW = 1300;
+  var screenH = 150;
   var max = Math.floor(screenH / 40);
   var height = 40 + 40 * (parseInt(Math.random() * (max+1)) - 1);
   var span = document.createElement('span');
   span.style.left = screenW + 'px';
   span.style.top = height + 'px';
   span.style.color = colors[index];
+  //span.style.fontSize = 30px;
   span.innerHTML = input;
   var dmDom = document.getElementById('dm');
   dmDom.appendChild(span);
+  console.log('addbarage!!');
 }
 
 // Refresh the comments
 dbRefComment.on('child_added', function (snapchat) {
   //com.innerHTML += '<p class="subtitle">'+snapchat.val()+'</p>';
   var input = snapchat.val().content;
+  console.log('child added!!');
   addBarage(input);
 });
 
