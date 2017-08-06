@@ -3,7 +3,8 @@ var dbRefAdvice = firebase.database().ref('advices/').child('advice');
 var dbRefAnswer = firebase.database().ref().child('answer');
 
 // Other variables
-var optionCounter = 2;
+var optionCounter = 0;
+var selectedOption = null;
 var curAnswer = null;
 var answerMatched = false;
 var GMmode = false;
@@ -43,7 +44,8 @@ function focusOption(num){
             content: num
         });
     } else {
-        if(num == curAnswer) answerMatched = true;
+        selectedOption = num;
+        if(selectedOption == curAnswer) answerMatched = true;
         else answerMatched = false;
     }
 }
@@ -51,6 +53,8 @@ function focusOption(num){
 // get answer from database
 dbRefAnswer.on('child_added', function (snapchat) {
     curAnswer = snapchat.val.content;
+    if(selectedOption == curAnswer) answerMatched = true;
+    else answerMatched = false;
 });
 
 // Wizard of Oz: refresh gamble table
@@ -66,6 +70,7 @@ $('#mode').click(function(){
 
 function refreshGamble(){
     $(".gamble-options button").remove();
+    optionCounter = 0;
 }
 
 $('#reset').click(function(){
