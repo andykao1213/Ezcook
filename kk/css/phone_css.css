@@ -1,0 +1,64 @@
+*{
+    /*border: 1px solid black;*/
+    position: relative;
+}
+
+body{
+    background-color: #f3f3f3;
+}
+
+.block{
+    width: 13000px;
+    height: 150px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0); 
+    color: rgba(255, 255, 255, 1);
+    /*border: 1px solid black;*/
+    overflow: hidden;
+    z-index: 1;
+}
+
+.tmp{
+    left: 7%;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+#dm span{
+    position: absolute;
+    font-family: 微軟正黑體;
+    font-size: 12px; 
+}
+
+.recepie, .contents, .pic{
+    display: inline-block;
+}
+
+#content{
+    font-family: 微軟正黑體;
+    font-size: 18px;
+    text-align: center;
+    top: 15%
+}
+
+#no{
+     font-family: 微軟正黑體;
+    font-size: 18px;
+    margin-left: 40%;
+    top: 30%;
+}
+
+.row{
+    margin-top: 30px;
+}
+
+.yo{
+    margin-top: 10px;
+}
+
+.game{
+    height: 35vh;
+    border: 1px solid black;
+    overflow: scroll;
+    margin-top: -15px;
+}
