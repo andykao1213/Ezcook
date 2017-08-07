@@ -3,9 +3,9 @@ var dbRefAdvice = firebase.database().ref('advices/').child('advice');
 var dbRefAnswer = firebase.database().ref().child('answer');
 
 // Other variables
-var optionCounter = 0;
+var optionCounter = 1;
 var selectedOption = 0;
-var curAnswer = null;
+var curAnswer = 0;
 var answerMatched = false;
 var GMmode = false;
 
@@ -27,7 +27,6 @@ $('#add').click(function(){
 dbRefAdvice.on('child_added', function (snapchat) {
     // get input from firebase
     var input = snapchat.val().content;
-    
     var btn = $("<button></button>").text(input);
     btn.attr("id", "btn" + optionCounter);
     btn.attr("onclick", "focusOption(" + optionCounter + ")")
@@ -53,7 +52,8 @@ function focusOption(num){
 
 // get answer from database
 dbRefAnswer.on('child_added', function (snapchat) {
-    curAnswer = snapchat.val.content;
+    curAnswer = snapchat.val().content;
+        console.log("cur_ans: "+curAnswer);
     if(selectedOption == curAnswer) answerMatched = true;
     else answerMatched = false;
     console.log("child_added ans: "+answerMatched);
@@ -72,6 +72,7 @@ $('#mode').click(function(){
 
 function refreshGamble(){
     $(".gamble-options button").remove();
+    optionCounter = 1;
 }
 
 $('#reset').click(function(){
