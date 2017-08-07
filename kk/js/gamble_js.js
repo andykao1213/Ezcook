@@ -46,17 +46,15 @@ function focusOption(num){
         selectedOption = num;
         if(selectedOption == curAnswer) answerMatched = true;
         else answerMatched = false;
-        console.log("selected ans: "+answerMatched);
     }
 }
 
 // get answer from database
 dbRefAnswer.on('child_added', function (snapchat) {
     curAnswer = snapchat.val().content;
-        console.log("cur_ans: "+curAnswer);
+//    console.log("cur_ans: "+curAnswer);
     if(selectedOption == curAnswer) answerMatched = true;
     else answerMatched = false;
-    console.log("child_added ans: "+answerMatched);
 });
 
 // Wizard of Oz: refresh gamble table
@@ -72,7 +70,11 @@ $('#mode').click(function(){
 
 function refreshGamble(){
     $(".gamble-options button").remove();
+    // reset game parameters
     optionCounter = 1;
+    selectedOption = 0;
+    curAnswer = 0;
+    answerMatched = false;
 }
 
 $('#reset').click(function(){
