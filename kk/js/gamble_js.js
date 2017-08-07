@@ -4,7 +4,7 @@ var dbRefAnswer = firebase.database().ref().child('answer');
 
 // Other variables
 var optionCounter = 0;
-var selectedOption = null;
+var selectedOption = 0;
 var curAnswer = null;
 var answerMatched = false;
 var GMmode = false;
@@ -47,6 +47,7 @@ function focusOption(num){
         selectedOption = num;
         if(selectedOption == curAnswer) answerMatched = true;
         else answerMatched = false;
+        console.log("selected ans: "+answerMatched);
     }
 }
 
@@ -55,6 +56,7 @@ dbRefAnswer.on('child_added', function (snapchat) {
     curAnswer = snapchat.val.content;
     if(selectedOption == curAnswer) answerMatched = true;
     else answerMatched = false;
+    console.log("child_added ans: "+answerMatched);
 });
 
 // Wizard of Oz: refresh gamble table
@@ -70,11 +72,11 @@ $('#mode').click(function(){
 
 function refreshGamble(){
     $(".gamble-options button").remove();
-    optionCounter = 0;
 }
 
 $('#reset').click(function(){
     dbRefAdvice.remove();
+    dbRefAnswer.remove();
     refreshGamble();
 });
 
