@@ -10,7 +10,7 @@ var answerMatched = false;
 var GMmode = false;
 
 $(".toggle").hide();
-$("#myModal").modal("hide");
+$("#myModal").modal("show");
 
 $('#add').click(function(){
     // pass the value to database
@@ -74,6 +74,10 @@ $('#mode').click(function(){
 });
 
 function refreshGamble(){
+    // reset database
+    dbRefAdvice.remove();
+    dbRefAnswer.remove();
+    // clear gameble table
     $(".gamble-options button").remove();
     // reset game parameters
     optionCounter = 1;
@@ -83,25 +87,23 @@ function refreshGamble(){
 }
 
 $('#reset').click(function(){
-    dbRefAdvice.remove();
-    dbRefAnswer.remove();
+    
     refreshGamble();
 });
 
-// pop result announcement window
-dbRefAdvice.on('value', function (snapchat){
+// aounnce game result
+$('#anounce').click(function(){
     if (!GMmode) {
         if(!snapchat.exists() && answerMatched) {
             //alert("YOU WIN!!!");
             $(".modal-body").text("Your advice worked!!!");
             $("#myModal").modal("show");
             answerMatched = false;
-            refreshGamble();
         } else if(!snapchat.exists() && !answerMatched) {
             //alert("New round started!");
             $(".modal-body").text("Your advice was ignored...");
             $("#myModal").modal("show");
-            refreshGamble();
         }
     }
+    refreshGamble();
 });
