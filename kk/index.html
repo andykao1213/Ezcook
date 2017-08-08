@@ -45,10 +45,10 @@
                     <button type="button" class="btn btn-primary" id="send">Send</button>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-12">
                 <!--put gambling here-->
-                <div class="gamble-options">
-                    <p id="gamble-title">Bet here!</p>
+                <p id="gamble-title" data-toggle="modal" data-target="#myModal">Bet here!</p>
+                <div class="gamble-options game">
                 </div>
                 <p></p>
                 <div class="row container">
@@ -60,35 +60,47 @@
                 <p></p>
                 <div class="gm">
                     <button id="mode">GM mode OFF</button>
-                    <button id="reset">Reset Gamble table</button>
+                    <button class="toggle" id="reset">Reset Gamble table</button>
+                    <button class="toggle" id="clear">Clear Comment</button>
                 </div>
-            </div>
-        </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <p id='fuck'>Change Steps Here !</p>
-                <div class="row container">
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-primary" id="prev">PREV</button>
+                <div class="col-md-20 col-sm-12 toggle">
+                    <div class="row justify-content-center">
+                        <p id='fuck'>Change Steps Here !</p>
+                        <div class="row container justify-content-center">
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-primary" id="prev">PREV</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-primary" id="next">NEXT</button>
+                            </div>   
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-primary" id="next">NEXT</button>
-                    </div>   
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
-                <p id='fuck'>Clear Comments</p>
-                <div class="row container">
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-primary" id="clear">CLEAR</button>
-                    </div>   
-                </div>
-            </div>
-        </div>    
-    
-    </body>
+        </div>
+        </div>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">New Round Started!</h4>
+          </div>
+          <div class="modal-body">
+            <p></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+        
+    </body>
     <!--JQuery, Tether, Bootstrap js-->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>

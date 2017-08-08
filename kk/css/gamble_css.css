@@ -26,12 +26,19 @@
     background-color: black;
 }
 
+.game{
+    height: 35vh;
+    /*border: 1px solid black;*/
+    overflow: scroll;
+    margin-top: -15px;
+}
+
 .form-control {
     margin: auto;
 }
 
 .gm button{
-    background-color: #f44336; 
+    background-color: #ff9800; 
     border: 1px solid black; 
     color: white; 
     padding: 10px 24px; /* Some padding */
@@ -40,6 +47,15 @@
     display: block; /* Make the buttons appear below each other */
     margin: auto;
 }
+
 .gm button:hover {
+    background-color: #e68a00;
+}
+
+#mode {
+    background-color: #f44336; 
+}
+
+#mode:hover {
     background-color: #da190b;
 }

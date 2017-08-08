@@ -9,6 +9,9 @@ var curAnswer = 0;
 var answerMatched = false;
 var GMmode = false;
 
+$(".toggle").hide();
+$("#myModal").modal("hide");
+
 $('#add').click(function(){
     // pass the value to database
     var input = $('#input-advice').val();
@@ -61,9 +64,11 @@ dbRefAnswer.on('child_added', function (snapchat) {
 $('#mode').click(function(){
     if(GMmode) {
         $('#mode').text("GM mode OFF");
+        $('.toggle').hide();
         GMmode = false;
     } else {
         $('#mode').text("GM mode ON");
+        $('.toggle').show();
         GMmode = true;
     }
 });
@@ -87,11 +92,15 @@ $('#reset').click(function(){
 dbRefAdvice.on('value', function (snapchat){
     if (!GMmode) {
         if(!snapchat.exists() && answerMatched) {
-            alert("YOU WIN!!!");
+            //alert("YOU WIN!!!");
+            $(".modal-body").text("Your advice worked!!!");
+            $("#myModal").modal("show");
             answerMatched = false;
             refreshGamble();
         } else if(!snapchat.exists() && !answerMatched) {
-            alert("You lose...")
+            //alert("New round started!");
+            $(".modal-body").text("Your advice was ignored...");
+            $("#myModal").modal("show");
             refreshGamble();
         }
     }
