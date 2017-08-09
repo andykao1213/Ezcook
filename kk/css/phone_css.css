@@ -49,7 +49,7 @@ body{
 }
 
 .row{
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .yo{
@@ -57,8 +57,8 @@ body{
 }
 
 .game{
-    height: 35vh;
-    border: 1px solid black;
+    height: 25vh;
+    /*border: 1px solid black;*/
     overflow: scroll;
     margin-top: -15px;
 }

@@ -17,11 +17,10 @@ var no = document.getElementById("no");
 var com = document.getElementById("comments");
 var cont = document.getElementById("content");
 var image = document.getElementById("image");
-
-console.log('fuck');
+var dbRefVid = firebase.database().ref().child('vidPlay');
 
 /*generate comment on video*/
-var colors = ['#2C3E50', '#FF0000', '#1E87F0', '#7AC84B', '#FF7F700', '#9B39F4', '#FF69B4'];
+var colors = ['#148AFF', '#FF0000', '#EAFF00', '#00FA32', '#FF751A', '#6700C7', '#FF2994'];
 function getInput(){
   //pass the value to database
   var newComment = dbRefComment.push();
