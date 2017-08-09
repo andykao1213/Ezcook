@@ -9,6 +9,9 @@ var curAnswer = 0;
 var answerMatched = false;
 var GMmode = false;
 
+$(".toggle").hide();
+$("#myModal").modal("show");
+
 $('#add').click(function(){
     // pass the value to database
     var input = $('#input-advice').val();
@@ -18,21 +21,36 @@ $('#add').click(function(){
     if(input || input.length !== 0){
         var newAdvice = dbRefAdvice.push();
         newAdvice.set({
-            content: input
+            content: input,
+            like: 10
         });
     }
 });
+
+var optionKey = [];
 
 // Add new advices to the gamble table
 dbRefAdvice.on('child_added', function (snapchat) {
     // get input from firebase
     var input = snapchat.val().content;
     var btn = $("<button></button>").text(input);
+    
     btn.attr("id", "btn" + optionCounter);
-    btn.attr("onclick", "focusOption(" + optionCounter + ")")
+    btn.attr("onclick", "focusOption(" + optionCounter + ")");
     $(".gamble-options").append(btn);
     optionCounter++;
+
+    firebase.database().ref('advices/advice/'+ snapchat.key + '/').child('like').once('value', function (snapchat) {
+        var likeCount = snapchat.val();
+        var like = $("<div></div>").text('❤ ' + likeCount);
+        like.attr("class", "like");
+        like.attr("id", "like"+(optionCounter-1));
+        $('#btn'+(optionCounter-1)).append(like);
+    });
+    optionKey.push(snapchat.key);
+
 });
+
 // Hightlight selected option
 function focusOption(num){
     $(".gamble-options button").css("border", "1px solid green");
@@ -47,6 +65,12 @@ function focusOption(num){
         if(selectedOption == curAnswer) answerMatched = true;
         else answerMatched = false;
     }
+    firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').once('value', function (snapchat) {
+       var likeCount = snapchat.val();
+       likeCount += Math.floor((Math.random() * 5) + 1);
+       firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').set(likeCount);
+       $('#like'+num).text('❤ ' + likeCount);
+    });
 }
 
 // get answer from database
@@ -61,14 +85,20 @@ dbRefAnswer.on('child_added', function (snapchat) {
 $('#mode').click(function(){
     if(GMmode) {
         $('#mode').text("GM mode OFF");
+        $('.toggle').hide();
         GMmode = false;
     } else {
         $('#mode').text("GM mode ON");
+        $('.toggle').show();
         GMmode = true;
     }
 });
 
 function refreshGamble(){
+    // reset database
+    dbRefAdvice.remove();
+    dbRefAnswer.remove();
+    // clear gameble table
     $(".gamble-options button").remove();
     // reset game parameters
     optionCounter = 1;
@@ -78,21 +108,23 @@ function refreshGamble(){
 }
 
 $('#reset').click(function(){
-    dbRefAdvice.remove();
-    dbRefAnswer.remove();
+    
     refreshGamble();
 });
 
-// pop result announcement window
-dbRefAdvice.on('value', function (snapchat){
+// aounnce game result
+$('#anounce').click(function(){
     if (!GMmode) {
         if(!snapchat.exists() && answerMatched) {
-            alert("YOU WIN!!!");
+            //alert("YOU WIN!!!");
+            $(".modal-body").text("Your advice worked!!!");
+            $("#myModal").modal("show");
             answerMatched = false;
-            refreshGamble();
         } else if(!snapchat.exists() && !answerMatched) {
-            alert("You lose...")
-            refreshGamble();
+            //alert("New round started!");
+            $(".modal-body").text("Your advice was ignored...");
+            $("#myModal").modal("show");
         }
     }
+    refreshGamble();
 });

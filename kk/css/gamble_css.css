@@ -7,6 +7,17 @@
     width: 55%; /* Set a width if needed */
     display: block; /* Make the buttons appear below each other */
     margin: auto;
+    position: relative;
+}
+
+.like{
+    right: 0px;
+    position: absolute;
+    display: inline-block;
+    border-left: 1.5px solid green;
+    padding: 10px 15px;
+    margin: 0px;
+    top: -1px;
 }
 
 .gamble-options button:not(:last-child) {
@@ -26,12 +37,19 @@
     background-color: black;
 }
 
+.game{
+    height: 35vh;
+    /*border: 1px solid black;*/
+    overflow: scroll;
+    margin-top: -15px;
+}
+
 .form-control {
     margin: auto;
 }
 
 .gm button{
-    background-color: #f44336; 
+    background-color: #ff9800; 
     border: 1px solid black; 
     color: white; 
     padding: 10px 24px; /* Some padding */
@@ -40,6 +58,15 @@
     display: block; /* Make the buttons appear below each other */
     margin: auto;
 }
+
 .gm button:hover {
+    background-color: #e68a00;
+}
+
+#mode {
+    background-color: #f44336; 
+}
+
+#mode:hover {
     background-color: #da190b;
 }
