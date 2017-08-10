@@ -9,6 +9,9 @@ var curAnswer = 0;
 var answerMatched = false;
 var GMmode = false;
 
+var prevNum = 0;
+var prevKey = null;
+
 $(".toggle").hide();
 $("#myModal").modal("hide");
 
@@ -33,12 +36,17 @@ var optionKey = [];
 dbRefAdvice.on('child_added', function (snapchat) {
     // get input from firebase
     var input = snapchat.val().content;
-    var btn = $("<button></button>").text(input);
-    
+    var btn = $("<button></button>");
+
     btn.attr("id", "btn" + optionCounter);
     btn.attr("onclick", "focusOption(" + optionCounter + ")");
     $(".gamble-options").append(btn);
     optionCounter++;
+
+    var txt = $("<div></div>").text(input);
+    txt.attr("class", "gambleText");
+    $('#btn'+(optionCounter-1)).append(txt);
+
 
     firebase.database().ref('advices/advice/'+ snapchat.key + '/').child('like').once('value', function (snapchat) {
         var likeCount = snapchat.val();
@@ -76,11 +84,25 @@ function focusOption(num){
         else answerMatched = false;
     }
     firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').once('value', function (snapchat) {
-       var likeCount = snapchat.val();
-       likeCount += Math.floor((Math.random() * 5) + 1);
-       firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').set(likeCount);
+       var likeCount = snapchat.val(); 
+       if(num != prevNum){
+            likeCount += Math.floor((Math.random() * 5) + 1);
+            firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').set(likeCount);
+            if(prevKey != null){
+                firebase.database().ref('advices/advice/' + prevKey + '/').child('like').once('value', function (snapchat) {
+                    var count = snapchat.val();
+                    console.log('prev like is'+count);
+                    count = count - Math.floor((Math.random() * 2) + 1);
+                    firebase.database().ref('advices/advice/'+ prevKey + '/').child('like').set(count);
+                });
+            }
+            console.log('prevKey is'+prevKey);
+            prevKey = optionKey[num-1];
+       }
+
+       prevNum = num;
+       
        $('#like'+num).text('❤ ' + likeCount);
-       console.log(optionKey);
     });
 }
 

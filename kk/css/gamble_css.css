@@ -15,12 +15,15 @@
     position: absolute;
     display: inline-block;
     border-left: 1.5px solid green;
-    padding: 10px 15px;
+    padding: 10px 0px;
     margin: 0px;
     top: -1px;
+    width: 25%;
+    height: 100%;
+    text-align: center;
 }
 
-.gamble-options button:not(:last-child) {
+.gamble-options button {
     border-bottom: none; /* Prevent double borders */
     text-align: left;
 }
@@ -70,4 +73,10 @@
 
 #mode:hover {
     background-color: #da190b;
+}
+
+.gambleText{
+    display: inline-block;
+    padding: 0;
+    width: 75%;
 }
