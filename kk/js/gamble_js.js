@@ -47,7 +47,17 @@ dbRefAdvice.on('child_added', function (snapchat) {
         like.attr("id", "like"+(optionCounter-1));
         $('#btn'+(optionCounter-1)).append(like);
     });
+
     optionKey.push(snapchat.key);
+    var mykey = snapchat.key;
+
+    // add listener
+    firebase.database().ref('advices/advice/'+ snapchat.key + '/').child('like').on('value', function (snapchat) {
+        var likeCount = snapchat.val();
+        var index = optionKey.indexOf(mykey);
+        $('#like'+(index+1)).text('❤ ' + likeCount);
+        console.log(index);
+    });  
 
 });
 
@@ -65,7 +75,7 @@ function focusOption(num){
         if(selectedOption == curAnswer) answerMatched = true;
         else answerMatched = false;
     }
-    firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').on('value', function (snapchat) {
+    firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').once('value', function (snapchat) {
        var likeCount = snapchat.val();
        likeCount += Math.floor((Math.random() * 5) + 1);
        firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').set(likeCount);
@@ -74,13 +84,13 @@ function focusOption(num){
     });
 }
 
-firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').on('value', function (snapchat) {
+/*firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').on('value', function (snapchat) {
        var likeCount = snapchat.val();
        likeCount += Math.floor((Math.random() * 5) + 1);
        firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').set(likeCount);
        $('#like'+num).text('❤ ' + likeCount);
        console.log(optionKey);
-});
+});*/
 
 // get answer from database
 dbRefAnswer.on('child_added', function (snapchat) {
