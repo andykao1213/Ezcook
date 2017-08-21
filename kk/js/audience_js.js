@@ -17,9 +17,10 @@ var no = document.getElementById("no");
 var com = document.getElementById("comments");
 var cont = document.getElementById("content");
 var image = document.getElementById("image");
+var dbRefVid = firebase.database().ref().child('vidPlay');
 
 /*generate comment on video*/
-var colors = ['#2C3E50', '#FF0000', '#1E87F0', '#7AC84B', '#FF7F700', '#9B39F4', '#FF69B4'];
+var colors = ['#148AFF', '#FF0000', '#EAFF00', '#00FA32', '#FF751A', '#6700C7', '#FF2994'];
 function getInput(){
   //pass the value to database
   var newComment = dbRefComment.push();
@@ -53,23 +54,26 @@ function addBarage(input){
   // add barage
   //clearInterval(timer);
   var index = parseInt(Math.random() * 7);
-  var screenW = 560;
-  var screenH = 100;
+  var screenW = 1300;
+  var screenH = 150;
   var max = Math.floor(screenH / 40);
   var height = 40 + 40 * (parseInt(Math.random() * (max+1)) - 1);
   var span = document.createElement('span');
   span.style.left = screenW + 'px';
   span.style.top = height + 'px';
   span.style.color = colors[index];
+  //span.style.fontSize = 30px;
   span.innerHTML = input;
   var dmDom = document.getElementById('dm');
   dmDom.appendChild(span);
+  console.log('addbarage!!');
 }
 
 // Refresh the comments
 dbRefComment.on('child_added', function (snapchat) {
   //com.innerHTML += '<p class="subtitle">'+snapchat.val()+'</p>';
   var input = snapchat.val().content;
+  console.log('child added!!');
   addBarage(input);
 });
 

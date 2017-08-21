@@ -2,12 +2,12 @@
 <html lang="en">
     <head>
 
-        <title>EZcook-Audience</title>
+        <title>EZcook-Phone</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!--bootstrap css-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="css\audience_css.css">
+        <link rel="stylesheet" type="text/css" href="css\phone_css.css">
         <link rel="stylesheet" type="text/css" href="css\gamble_css.css">
     </head>
 
@@ -19,92 +19,46 @@
         </nav>
         <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
-                <div class="row justify-content-center">
-                    <div class="tmp">
-                        <div class="block" id="dm"></div>
-                        <video width="560" controls>
-                            <source src="source/TaiCHI Demo.mp4" type="video/mp4">
-                            <source src="source/TaiCHI Demo.ogg" type="video/ogg">
-                            Your browser does not support HTML5 video.
-                        </video>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-1">
-                        <span class="badge badge-default" id="no"></span>
-                    </div>
-                    <div class="col-md-7">
-                        <span class="align-middle" id="content"></span>
-                    </div>
-                    <div class="col-md-4">
-                         <img src="" width="100" height="100" class="img-responsive center-block" id="image">
-                    </div>
+            <div class="col-md-6 col-12">
+                <!--put gambling here-->
+                <p id="gamble-title">Bet here!</p>
+                <div class="gamble-options game">
+                    
                 </div>
                 <div class="row container">
-                    <div class="col-md-10">
+                    <div class="col-md-10 col-8">
+                        <input class="form-control" type="text" placeholder="Your advice..." id="input-advice">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="add">Add</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="row justify-content-center">
+                    <div class="col-md-4 col-3">
+                         <img src="" width="100" height="100" class="img-responsive center-block" id="image">
+                    </div>
+                    <div class="col-md-1 col-2">
+                        <p class="badge badge-default" id="no"></p>
+                    </div>
+                    <div class="col-md-7 col-7">
+                        <p class="" id="content"></p>
+                    </div>
+                </div>
+                    <div class="yo">
+                        <p id="gamble-title">Talk to Others!</p>
+                    </div>
+                <div class="row container">
+                    <div class="col-md-10 col-8">
                         <input class="form-control" type="text" placeholder="Say Something......" id="example-text-input">
                     </div>
                     <button type="button" class="btn btn-primary" id="send">Send</button>
                 </div>
             </div>
-            <div class="col-md-6 col-12">
-                <!--put gambling here-->
-                <p id="gamble-title" data-toggle="modal" data-target="#myModal">Bet here!</p>
-                <div class="gamble-options game">
-                </div>
-                <p></p>
-                <div class="row container">
-                    <div class="col-md-10">
-                        <input class="form-control" type="text" placeholder="Your advice..." id="input-advice">
-                    </div>
-                    <button type="button" class="btn btn-primary" id="add">Add</button>
-                </div>
-                <p></p>
-                <div class="gm">
-                    <button id="mode">GM mode OFF</button>
-                    <button class="toggle" id="reset">Clear Gamble table</button>
-                    <button class="toggle" id="clear">Clear Comment</button>
-                    <button class="toggle" id="anounce">Anounce result</button>
-                </div>
-                <div class="col-md-20 col-sm-12 toggle">
-                    <div class="row justify-content-center">
-                        <p id='fuck'>Change Steps Here !</p>
-                        <div class="row container justify-content-center">
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-primary" id="prev">PREV</button>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-primary" id="next">NEXT</button>
-                            </div>   
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-        </div>
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">New Round Started!</h4>
-          </div>
-          <div class="modal-body">
-            <p></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-        
+        </div>    
+    
     </body>
+
     <!--JQuery, Tether, Bootstrap js-->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
@@ -112,5 +66,4 @@
     <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
     <script src="js\audience_js.js"></script>
     <script src="js\gamble_js.js"></script>
-    <script src="js\backend_js.js"></script>
 </html>

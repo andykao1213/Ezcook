@@ -8,19 +8,8 @@ body{
 }
 
 .block{
-    width: 1100px;
-    height: 180px;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0); 
-    color: rgba(255, 255, 255, 1);
-    /*border: 1px solid black;*/
-    overflow: hidden;
-    z-index: 1;
-}
-
-.block2{
-    width: 560px;
-    height: 180px;
+    width: 13000px;
+    height: 150px;
     position: absolute;
     background-color: rgba(0, 0, 0, 0); 
     color: rgba(255, 255, 255, 1);
@@ -30,7 +19,7 @@ body{
 }
 
 .tmp{
-    left: 15%;
+    left: 7%;
     display: inline-block;
     margin-top: 10px;
 }
@@ -38,7 +27,7 @@ body{
 #dm span{
     position: absolute;
     font-family: 微軟正黑體;
-    font-size: 30px; 
+    font-size: 12px; 
 }
 
 .recepie, .contents, .pic{
@@ -47,12 +36,29 @@ body{
 
 #content{
     font-family: 微軟正黑體;
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
+    top: 15%
 }
 
 #no{
      font-family: 微軟正黑體;
-    font-size: 30px;
+    font-size: 18px;
     margin-left: 40%;
+    top: 30%;
+}
+
+.row{
+    margin-top: 15px;
+}
+
+.yo{
+    margin-top: 10px;
+}
+
+.game{
+    height: 25vh;
+    /*border: 1px solid black;*/
+    overflow: scroll;
+    margin-top: -15px;
 }

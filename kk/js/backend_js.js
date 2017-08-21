@@ -1,5 +1,11 @@
 var dbRefStep = firebase.database().ref().child('current_step');
 var dbRefComment = firebase.database().ref('comments/').child('comment');
+var dbRefVid = firebase.database().ref().child('vidPlay');
+
+var video = document.getElementById('vid');
+
+//Initial video no to play
+dbRefVid.set(false);
 
 $('#prev').click(function(){
     dbRefStep.once('value', function (snapchat) {
@@ -29,4 +35,15 @@ $('#next').click(function(){
 
 $('#clear').click(function () {
    dbRefComment.remove(); 
+});
+
+$('#play').click(function () {
+    dbRefVid.set(true);
+});
+
+dbRefVid.on('value', function (snapchat) {
+    isPlay = snapchat.val();
+    if(isPlay){
+        video.play();
+    }
 });
