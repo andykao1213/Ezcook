@@ -11,6 +11,7 @@ firebase.initializeApp(config);
 
 // Get the element
 var dbRefComment = firebase.database().ref('comments/').child('comment');
+var dbRdfNumOfComment = firebase.database().ref().child('numOfComments');
 var dbRefRecipe = firebase.database().ref('step/');
 var dbRefStep = firebase.database().ref().child('current_step');
 var no = document.getElementById("no");
@@ -21,13 +22,26 @@ var dbRefVid = firebase.database().ref().child('vidPlay');
 
 /*generate comment on video*/
 var colors = ['#148AFF', '#FF0000', '#EAFF00', '#00FA32', '#FF751A', '#6700C7', '#FF2994'];
+var numOfComment;
 function getInput(){
+  
+  dbRdfNumOfComment.once('value', function (snapchat) {
+    numOfComment = snapchat.val();
+    console.log('before'+numOfComment);
+    numOfComment += 1;
+    dbRdfNumOfComment.set(numOfComment);
+    console.log('after'+ numOfComment);
+  });
+  
   //pass the value to database
   var newComment = dbRefComment.push();
   var input = $('#example-text-input').val();
   //console.log(newComment);
+  var date = new Date();
+  var nowTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
   newComment.set({
-    content: input
+    content: input,
+    time: nowTime
   });
   //console.log(newComment.key);
   // Clear the input
