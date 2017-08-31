@@ -47,3 +47,4 @@ dbRefVid.on('value', function (snapchat) {
         video.play();
     }
 });
+
