@@ -30,7 +30,7 @@ body{
 }
 
 .tmp{
-    left: 15%;
+    left: 0%;
     display: inline-block;
     margin-top: 10px;
 }
@@ -55,4 +55,7 @@ body{
      font-family: 微軟正黑體;
     font-size: 30px;
     margin-left: 40%;
+}
+
+.nav-btn{
 }

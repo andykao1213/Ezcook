@@ -4,7 +4,7 @@
     color: white; /* White text */
     padding: 10px 24px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
-    width: 90%; /* Set a width if needed */
+    width: 85%; /* Set a width if needed */
     display: block; /* Make the buttons appear below each other */
     margin: auto;
     position: relative;
@@ -50,29 +50,6 @@
 
 .form-control {
     margin: auto;
-}
-
-.gm button{
-    background-color: #ff9800; 
-    border: 1px solid black; 
-    color: white; 
-    padding: 10px 24px; /* Some padding */
-    cursor: pointer; /* Pointer/hand icon */
-    width: 55%; /* Set a width if needed */
-    display: block; /* Make the buttons appear below each other */
-    margin: auto;
-}
-
-.gm button:hover {
-    background-color: #e68a00;
-}
-
-#mode {
-    background-color: #f44336; 
-}
-
-#mode:hover {
-    background-color: #da190b;
 }
 
 .gambleText{

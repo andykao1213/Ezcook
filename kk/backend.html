@@ -12,11 +12,17 @@
     </head>
 
     <body>
-
-        <nav class="navbar navbar-inverse bg-inverse">
+        <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
             <!-- Navbar content -->
             <a class="navbar-brand" href="#">EZcook</a>
+            <ul class="nav navbar-nav">
+            <li class="nav-item pull-xs-right">
+                <button id="mode" type="button" class="btn btn-secondary btn-sm nav-btn">Turn on GM mode</button>
+            <button type="button" class="btn btn-secondary btn-sm nav-btn" id="btnLogout">LOGOUT</button>
+            </li>
+            </ul>
         </nav>
+        
         <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
@@ -41,35 +47,33 @@
                          <img src="" width="100" height="100" class="img-responsive center-block" id="image">
                     </div>
                 </div>
-                <div class="row container">
+                <div class="row container justify-content-center">
                     <div class="col-md-10">
-                        <input class="form-control" type="text" placeholder="Say Something......" id="example-text-input">
+                        <input class="form-control" type="text" placeholder="聊天..." id="example-text-input">
                     </div>
-                    <button type="button" class="btn btn-primary" id="send">Send</button>
+                    <button type="button" class="btn btn-warning" id="send">Send</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <!--put gambling here-->
                 <div class="gamble-options">
-                    <p id="gamble-title">Bet here!</p>
                 </div>
                 <p></p>
-                <div class="row container">
+                <div class="row container justify-content-center">
                     <div class="col-md-10">
-                        <input class="form-control" type="text" placeholder="Your advice..." id="input-advice">
+                        <input class="form-control" type="text" placeholder="給新手的建議..." id="input-advice">
                     </div>
-                    <button type="button" class="btn btn-primary" id="add">Add</button>
+                    <button type="button" class="btn btn-warning" id="add">Add</button>
                 </div>
                 <p></p>
                 <div class="gm">
-                    <button id="mode">GM mode OFF</button>
-                    <button id="reset">Reset Gamble table</button>
+                    <button id="reset" button type="button" class="btn btn-primary">Reset Gamble table</button>
                 </div>
             </div>
         </div>
         </div>
         <div class="row">
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-4 col-sm-12 gm">
                 <p id='fuck'>Change Steps Here !</p>
                 <div class="row container">
                     <div class="col-md-2">
@@ -80,7 +84,7 @@
                     </div>   
                 </div>
             </div>
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-4 col-sm-12 gm">
                 <p id='fuck'>Clear Comments</p>
                 <div class="row container">
                     <div class="col-md-2">
@@ -88,7 +92,7 @@
                     </div>  
                 </div>
             </div>
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-4 col-sm-12 gm">
                 <p id='fuck'>Control video(每次要重新開始要記得重新整理!!)</p>
                 <div class="row container">
                     <div class="col-md-2">
@@ -97,7 +101,7 @@
                 </div>
             </div>
         </div>  
-        <button type="button" class="btn btn-primary btn-lg" id="btnLogout">LOGOUT</button>  
+          
     
     </body>
 

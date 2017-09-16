@@ -12,7 +12,7 @@ var GMmode = false;
 var prevNum = 0;
 var prevKey = null;
 
-$(".toggle").hide();
+$(".gm").hide();
 $("#myModal").modal("hide");
 
 $('#add').click(function(){
@@ -132,12 +132,12 @@ dbRefAnswer.on('child_added', function (snapchat) {
 // Wizard of Oz: refresh gamble table
 $('#mode').click(function(){
     if(GMmode) {
-        $('#mode').text("GM mode OFF");
-        $('.toggle').hide();
+        $('#mode').text("Turn on GM mode");
+        $('.gm').hide();
         GMmode = false;
     } else {
-        $('#mode').text("GM mode ON");
-        $('.toggle').show();
+        $('#mode').text("Turn off GM mode");
+        $('.gm').show();
         GMmode = true;
     }
 });
