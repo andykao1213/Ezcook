@@ -1,20 +1,31 @@
+*{
+    /*border: 1px solid black;*/
+    font-family: 微軟正黑體
+}
+
 .gamble-options button {
-    background-color: #4CAF50; /* Green background */
-    border: 1px solid green; /* Green border */
-    color: white; /* White text */
+    background-color: rgb(244, 246, 248); /* Green background */
+    border: 0.5px solid rgba(252, 252, 252, 0.90); /* Green border */
+    color: #4A4A4A; /* White text */
     padding: 10px 24px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
-    width: 85%; /* Set a width if needed */
+    width: 350px; /* Set a width if needed */
+    height: 120px;
     display: block; /* Make the buttons appear below each other */
-    margin: auto;
+    margin-top: 20px;
     position: relative;
+    border-bottom: none; /* Prevent double borders */
+    text-align: left;
+    box-shadow: 0px 23px 15px -20px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    transition-duration: 0.5s;
 }
 
 .like{
     right: 0px;
     position: absolute;
     display: inline-block;
-    border-left: 1.5px solid green;
+    /*border-left: 1.5px solid green;*/
     padding: 10px 0px;
     margin: 0px;
     top: -1px;
@@ -23,14 +34,16 @@
     text-align: center;
 }
 
-.gamble-options button {
-    border-bottom: none; /* Prevent double borders */
-    text-align: left;
+.gamble-options{
+    /*border: 1px solid black;*/
+    margin-top: 35px;
+    margin-bottom: 0px; 
+    height: 80%;
 }
 
 /* Add a background color on hover */
 .gamble-options button:hover {
-    background-color: #3e8e41;
+    transform: scale(1.05, 1.05);
 }
 
 #gamble-title {
@@ -56,4 +69,8 @@
     display: inline-block;
     padding: 0;
     width: 75%;
+}
+
+.chat{
+    margin-top: 0px;
 }

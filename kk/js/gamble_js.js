@@ -74,7 +74,7 @@ dbRefAdvice.on('child_added', function (snapchat) {
 
 // Hightlight selected option
 function focusOption(num){
-    $(".gamble-options button").css("border", "1px solid green");
+    $(".gamble-options button").css("border", "0.5px solid rgba(252, 252, 252, 0.90)");
     $("#btn"+num).css("border", "2px solid red");
     if (GMmode) {
         var newAnswer = dbRefAnswer.push();
