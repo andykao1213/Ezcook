@@ -29,6 +29,7 @@ $('#add').click(function(){
         });
     }
     focusOption(optionCounter-1); //focus new advice immediately
+    $('.gamble-options').scrollTop(1000);
 });
 
 var optionKey = [];
