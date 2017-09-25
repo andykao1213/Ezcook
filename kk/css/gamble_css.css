@@ -18,7 +18,7 @@
     text-align: left;
     box-shadow: 0px 23px 15px -20px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
 }
 
 .like{
@@ -38,7 +38,9 @@
     /*border: 1px solid black;*/
     margin-top: 35px;
     margin-bottom: 0px; 
-    height: 80%;
+    height: 500px;
+    overflow: hidden;
+    /*z-index: 1;*/
 }
 
 /* Add a background color on hover */
@@ -73,4 +75,8 @@
 
 .chat{
     margin-top: 0px;
+}
+
+.gameble_place{
+    overflow: hidden;
 }

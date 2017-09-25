@@ -25,7 +25,16 @@ $('#add').click(function(){
         var newAdvice = dbRefAdvice.push();
         newAdvice.set({
             content: input,
+            user: userID.ID,
             like: 10
+        });
+        var date = new Date();
+        var nowTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+        var dbRefuserAdvice = firebase.database().ref('userLog/'+userID.ID+'/').child('advices');
+        var userAdvice = dbRefuserAdvice.push();
+        userAdvice.set({
+          content: input,
+          time: nowTime
         });
     }
 });
@@ -37,7 +46,7 @@ dbRefAdvice.on('child_added', function (snapchat) {
     // get input from firebase
     var input = snapchat.val().content;
     var btn = $("<button></button>");
-    console.log(input);
+    //console.log(input);
 
     btn.attr("id", "btn" + optionCounter);
     btn.attr("onclick", "focusOption(" + optionCounter + ")");
@@ -112,14 +121,6 @@ function focusOption(num){
        $('#like'+num).text('❤ ' + likeCount);
     });
 }
-
-/*firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').on('value', function (snapchat) {
-       var likeCount = snapchat.val();
-       likeCount += Math.floor((Math.random() * 5) + 1);
-       firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').set(likeCount);
-       $('#like'+num).text('❤ ' + likeCount);
-       console.log(optionKey);
-});*/
 
 // get answer from database
 dbRefAnswer.on('child_added', function (snapchat) {

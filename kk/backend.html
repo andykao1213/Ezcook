@@ -17,13 +17,39 @@
             <a class="navbar-brand" href="#">EZcook</a>
             <ul class="nav navbar-nav">
             <li class="nav-item pull-xs-right">
-                <button id="mode" type="button" class="btn btn-secondary btn-sm nav-btn">Turn on GM mode</button>
-            <button type="button" class="btn btn-secondary btn-sm nav-btn" id="btnLogout">LOGOUT</button>
+               <!-- <button id="mode" type="button" class="btn btn-secondary btn-sm nav-btn login">Turn on GM mode</button>-->
+            <button type="button" class="btn btn-secondary btn-sm nav-btn login" id="btnLogout">LOGOUT</button>
             </li>
             </ul>
         </nav>
         
-        <div class="container-fluid">
+        <!--Login Page-->
+        <div class="container-fluid logout">
+            <br>
+            <div class="row justify-content-center">
+                <h1>Welcome</h1> 
+            </div>  
+            <br>
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <input class="form-control" type="text" placeholder="UserID" id="UID">
+                </div>
+                
+            </div>
+            <br>
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <input class="form-control" type="text" placeholder="Password" id="PSWD">
+                </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+                <button type="button" class="btn btn-primary btn-lg" id="btnLogin">LOGIN</button>
+            </div>            
+        </div>
+
+        <!--Main Page-->
+        <div class="container-fluid login">
         <div class="row">
             <div class="col-md-8">
                 <div class="row justify-content-center">
