@@ -1,6 +1,7 @@
 // Get the element
 var dbRefAdvice = firebase.database().ref('advices/').child('advice');
 var dbRefAnswer = firebase.database().ref().child('answer');
+var dbRefCounting = firebase.database().ref().child('isCounting');
 
 // Other variables
 var optionCounter = 1;
@@ -13,7 +14,6 @@ var prevNum = 0;
 var prevKey = null;
 
 $(".gm").hide();
-//$("#myModal").modal("hide");
 
 $('#add').click(function(){
     // pass the value to database
@@ -90,9 +90,13 @@ function focusOption(num){
         newAnswer.set({
             content: num
         });
-        dbRefAdvice.remove();
-//        dbRefAnswer.remove();
-        refreshGamble();
+        dbRefCounting.set(true);
+        setTimeout(function(){
+            dbRefAdvice.remove();
+            refreshGamble();
+            dbRefCounting.set(false);
+        }, 10000);
+        
     } else {
             // reset all gamble options
         $(".gamble-options button").css("border", "0.5px solid rgba(252, 252, 252, 0.90)");
@@ -218,19 +222,22 @@ $('#reset').click(function(){
 });
 
 // pop result announcement window
-dbRefAdvice.on('value', function (snapchat){
-    if (!GMmode) {
-        if(!snapchat.exists() && answerMatched) {
-            alert("YOU WIN!!!");
-            // $(".modal-body").text("Your advice worked!!!");
-            // $("#myModal").modal("show");
-            answerMatched = false;
-            refreshGamble();
-        } else if(!snapchat.exists() && !answerMatched) {
-            alert("New round started!");
-            // $(".modal-body").text("Your advice was ignored...");
-            // $("#myModal").modal("show");
-            refreshGamble();
+dbRefCounting.on('value', function (snapchat){
+    if (!GMmode) {  
+        console.log('yo');  
+        if(snapchat.val()==true && answerMatched) {
+            console.log("answer match!");
+            setTimeout(function(){
+                alert("YOU WIN!!!");
+                answerMatched = false;
+                refreshGamble();  
+            }, 8000);          
+        } else if(snapchat.val() == true && !answerMatched) {
+            console.log("answer wrong!");
+            setTimeout(function(){
+                 alert("New round started!");
+                refreshGamble();
+            }, 8000);  
         }
     }
 });
