@@ -9,6 +9,7 @@ var selectedOption = 0;
 var curAnswer = 0;
 var answerMatched = false;
 var GMmode = false;
+var curScore = 0;
 
 var prevNum = 0;
 var prevKey = null;
@@ -239,5 +240,6 @@ dbRefCounting.on('value', function (snapchat){
                 refreshGamble();
             }, 8000);  
         }
+        $("#score").text("Score: "+curScore);
     }
 });
