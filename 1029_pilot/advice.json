@@ -1,0 +1,39 @@
+{
+  "advice" : {
+    "-Kut9rQ0UrJVgC4NdRZb" : {
+      "content" : "turn off the fire!",
+      "like" : 13,
+      "user" : "02"
+    },
+    "-Kut9u4fadnGvSX7X5aZ" : {
+      "content" : "關火",
+      "like" : 1,
+      "user" : "01"
+    },
+    "-KutA3zf_3X2ahHUZvrs" : {
+      "content" : "your spoon will scratch the pan! be careful~",
+      "like" : 13,
+      "user" : "02"
+    },
+    "-KutA6P6udmbfZsFvtem" : {
+      "content" : "下次要用木筷，這是不沾鍋",
+      "like" : 12,
+      "user" : "01"
+    },
+    "-KutAMjdJUYtpmEOISKm" : {
+      "content" : "要再煮一下嗎？？？",
+      "like" : 12,
+      "user" : "01"
+    },
+    "-KutAMwdSyWSsIMZiFW3" : {
+      "content" : "you should slice the chicken earlier ! i thought you gonna eat it in big size of chicken",
+      "like" : 13,
+      "user" : "02"
+    },
+    "-KutAXunb31Kq__ic1AR" : {
+      "content" : "你的手剛剛摸生肉，但是現在又直接摸熟的@@",
+      "like" : 12,
+      "user" : "01"
+    }
+  }
+}

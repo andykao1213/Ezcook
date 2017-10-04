@@ -9,7 +9,7 @@
     color: #4A4A4A; /* White text */
     padding: 10px 24px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
-    width: 350px; /* Set a width if needed */
+    width: 330px; /* Set a width if needed */
     height: 120px;
     display: block; /* Make the buttons appear below each other */
     margin-top: 20px;
@@ -36,11 +36,10 @@
 
 .gamble-options{
     /*border: 1px solid black;*/
-    margin-top: 35px;
+    margin-top: 15px;
     margin-bottom: 0px; 
-    height: 500px;
-    overflow: hidden;
-    /*z-index: 1;*/
+    height: 400px;
+    overflow: scroll;
 }
 
 /* Add a background color on hover */
@@ -54,13 +53,6 @@
     font-weight: bold;
     color: yellow;
     background-color: black;
-}
-
-.game{
-    height: 35vh;
-    /*border: 1px solid black;*/
-    overflow: scroll;
-    margin-top: -15px;
 }
 
 .form-control {

@@ -13,7 +13,7 @@ var prevNum = 0;
 var prevKey = null;
 
 $(".gm").hide();
-$("#myModal").modal("hide");
+//$("#myModal").modal("hide");
 
 $('#add').click(function(){
     // pass the value to database
@@ -37,6 +37,8 @@ $('#add').click(function(){
           time: nowTime
         });
     }
+    focusOption(optionCounter-1); //focus new advice immediately
+    $('.gamble-options').scrollTop(1000);
 });
 
 var optionKey = [];
@@ -50,7 +52,7 @@ dbRefAdvice.on('child_added', function (snapchat) {
 
     btn.attr("id", "btn" + optionCounter);
     btn.attr("onclick", "focusOption(" + optionCounter + ")");
-    $(".gamble-options").append(btn);
+    $(".gamble-options").append(btn);  
     optionCounter++;
 
     var txt = $("<div></div>").text(input);
@@ -76,50 +78,105 @@ dbRefAdvice.on('child_added', function (snapchat) {
         var likeCount = snapchat.val();
         var index = optionKey.indexOf(mykey);
         $('#like'+(index+1)).text('❤ ' + likeCount);
-        console.log(index);
+        console.log("index: "+index);
     });  
-
 });
 
 // Hightlight selected option
 function focusOption(num){
-    $(".gamble-options button").css("border", "0.5px solid rgba(252, 252, 252, 0.90)");
-    $("#btn"+num).css("border", "2px solid red");
-    if (GMmode) {
+    if(GMmode){
+        // anounce the result imediately after novice select an answer
         var newAnswer = dbRefAnswer.push();
         newAnswer.set({
             content: num
         });
+        dbRefAdvice.remove();
+//        dbRefAnswer.remove();
+        refreshGamble();
     } else {
-        selectedOption = num;
-        if(selectedOption == curAnswer) answerMatched = true;
-        else answerMatched = false;
-    }
-    firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').once('value', function (snapchat) {
-       var likeCount = snapchat.val(); 
-       if(num != prevNum){
-            if (GMmode)
-                likeCount += Math.floor((Math.random() * 5) + 50);
-            else 
-                likeCount += Math.floor((Math.random() * 5) + 1);
-            firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').set(likeCount);
-            if(prevKey != null){
-                firebase.database().ref('advices/advice/' + prevKey + '/').child('like').once('value', function (snapchat) {
+            // reset all gamble options
+        $(".gamble-options button").css("border", "0.5px solid rgba(252, 252, 252, 0.90)");
+        // add red border to selected option
+        $("#btn"+num).css("border", "2px solid red");
+
+        firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').once('value', function (snapchat) {
+           var likeCount = snapchat.val(); 
+           if(num != prevNum){
+               selectedOption = num; //use selctedOption to record current chosen answer
+
+               likeCount += Math.floor((Math.random() * 5) + 1);
+
+               firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').set(likeCount);
+                if(prevKey != null){
+                    firebase.database().ref('advices/advice/' + prevKey + '/').child('like').once('value', function (snapchat) {
                     var count = snapchat.val();
-                    console.log('prev like is'+count);
+                    console.log('prev like is '+count);
                     count = count - Math.floor((Math.random() * 2) + 1);
                     if(count > 0)
                         firebase.database().ref('advices/advice/'+ prevKey + '/').child('like').set(count);
-                });
-            }
-            console.log('prevKey is'+prevKey);
-            prevKey = optionKey[num-1];
-       }
+                    });
+                }
+                console.log('prevKey is '+prevKey);
+                console.log('preNum is '+prevNum);
+                prevKey = optionKey[num-1];
+                prevNum = num;
 
-       prevNum = num;
-       
-       $('#like'+num).text('❤ ' + likeCount);
-    });
+           } else {
+               // when audience select the same advice repeatly
+               if(selectedOption == num) {
+                    selectedOption = 0;
+                    likeCount -= Math.floor((Math.random() * 5) + 1);
+
+                    $(".gamble-options button").css("border", "0.5px solid rgba(252, 252, 252, 0.90)");
+                    firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').set(likeCount);
+                    if(prevKey != null){
+                        firebase.database().ref('advices/advice/' + prevKey + '/').child('like').once('value', function (snapchat) {
+                            var count = snapchat.val();
+                            console.log('prev like is'+count);
+                            count = count - Math.floor((Math.random() * 2) + 1);
+                            if(count > 0)
+                                firebase.database().ref('advices/advice/'+ prevKey + '/').child('like').set(count);
+                        });
+                    }
+                    console.log('prevKey is '+prevKey);
+                    console.log('preNum is '+prevNum);
+                    prevKey = null;
+                    prevNum = num;
+               }
+               else {
+                    selectedOption = num;
+                    likeCount += Math.floor((Math.random() * 5) + 1);
+
+                    firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').set(likeCount);
+                    if(prevKey != null){
+                    firebase.database().ref('advices/advice/' + prevKey + '/').child('like').once('value', function (snapchat) {
+                        var count = snapchat.val();
+                        console.log('prev like is '+count);
+                        count = count - Math.floor((Math.random() * 2) + 1);
+                        if(count > 0)
+                            firebase.database().ref('advices/advice/'+ prevKey + '/').child('like').set(count);
+                        });
+                    }
+                    console.log('prevKey is '+prevKey);
+                    console.log('preNum is '+prevNum);
+                    prevKey = optionKey[num-1];
+                    prevNum = num;
+                }  
+            }
+            $('#like'+num).text('❤ ' + likeCount);
+        });
+
+        // check whether the answer of audience & novice matched
+        if (GMmode) {
+            var newAnswer = dbRefAnswer.push();
+            newAnswer.set({
+                content: selectedOption
+            });
+        } else {
+            if(selectedOption == curAnswer) answerMatched = true;
+            else answerMatched = false;
+        }
+    }  
 }
 
 // get answer from database

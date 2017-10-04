@@ -11,7 +11,7 @@ $('#prev').click(function(){
     dbRefStep.once('value', function (snapchat) {
         step = snapchat.val();
         if(step == 1){
-            step = 5;
+            step = 9;
         }   
         else{
             step -= 1;
@@ -23,7 +23,7 @@ $('#prev').click(function(){
 $('#next').click(function(){
     dbRefStep.once('value', function (snapchat) {
         step = snapchat.val();
-        if(step == 5){
+        if(step == 9){
             step = 1;
         }
         else{
