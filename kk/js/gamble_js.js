@@ -8,13 +8,15 @@ var optionCounter = 1;
 var selectedOption = 0;
 var curAnswer = 0;
 var answerMatched = false;
-var GMmode = false;
-var curScore = 0;
+var GMmode = false; //game master mode
+var curScore = 0;   //audience current score
+var delay = 8; //delay from live-streaming
 
 var prevNum = 0;
 var prevKey = null;
 
 $(".gm").hide();
+$(".countdown").hide();
 
 $('#add').click(function(){
     // pass the value to database
@@ -227,19 +229,40 @@ dbRefCounting.on('value', function (snapchat){
     if (!GMmode) {  
         console.log('yo');  
         if(snapchat.val()==true && answerMatched) {
+            startCountDown();
             console.log("answer match!");
             setTimeout(function(){
                 alert("YOU WIN!!!");
                 answerMatched = false;
                 refreshGamble();  
-            }, 8000);          
+            }, delay*1000);          
         } else if(snapchat.val() == true && !answerMatched) {
+            startCountDown();
             console.log("answer wrong!");
             setTimeout(function(){
                  alert("New round started!");
                 refreshGamble();
-            }, 8000);  
+            }, delay*1000);  
         }
         $("#score").text("Score: "+curScore);
     }
 });
+
+//countdown timer to inform audience when new round will start
+function startCountDown(){
+    if(!GMmode){
+        var delayCounter = delay-1; // fixed delay
+        $(".advice").hide();
+        $(".countdown").show();
+
+        var x = setInterval(function(){
+            $("#countdown-text").text("將於"+delayCounter+"秒後公佈新手選擇的建議");
+            delayCounter--;
+            if(delayCounter<0){
+                clearInterval(x);
+                $(".countdown").hide();
+                $(".advice").show();
+            }
+        }, 1000);
+    }
+}

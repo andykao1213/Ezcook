@@ -40,7 +40,6 @@
     margin-bottom: 0px; 
     height: 400px;
     overflow: scroll;
-    position: relative;
 }
 
 .gamble-options button:hover {
@@ -57,6 +56,15 @@
 
 .form-control {
     margin: auto;
+}
+
+.countdown{
+    z-index: 1;
+}
+
+#countdown-text{
+    color: red;
+    text-align: center;
 }
 
 .gambleText{
