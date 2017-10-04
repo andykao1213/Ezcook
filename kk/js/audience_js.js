@@ -42,10 +42,10 @@ function getInput(){
   
   //pass the value & time to database
   var newComment = dbRefComment.push();
-  console.log("Didn't return");
+  //console.log("Didn't return");
   var date = new Date();
   var nowTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-  console.log("The user ID is: " + userID);
+  //console.log("The user ID is: " + userID);
   newComment.set({
     content: input,
     user: userID.ID,
@@ -80,7 +80,7 @@ function move(){
 //add the barage to the video
 function addBarage(input){
   var index = parseInt(Math.random() * 7);
-  var screenW = 1300;
+  var screenW = 560;
   var screenH = 150;
   var max = Math.floor(screenH / 40);
   var height = 40 + 40 * (parseInt(Math.random() * (max+1)) - 1);
@@ -92,7 +92,7 @@ function addBarage(input){
   span.innerHTML = input;
   var dmDom = document.getElementById('dm');
   dmDom.appendChild(span);
-  console.log('addbarage!!');
+  //console.log('addbarage!!');
 }
 
 // Refresh the comments
