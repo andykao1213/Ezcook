@@ -4,12 +4,12 @@
 }
 
 .gamble-options button {
-    background-color: rgb(244, 246, 248); /* Green background */
-    border: 0.5px solid rgba(252, 252, 252, 0.90); /* Green border */
-    color: #4A4A4A; /* White text */
-    padding: 10px 24px; /* Some padding */
+    background-color: rgb(244, 246, 248);
+    border: 0.5px solid rgba(252, 252, 252, 0.90);
+    color: #4A4A4A;
+    padding: 10px 24px; 
     cursor: pointer; /* Pointer/hand icon */
-    width: 330px; /* Set a width if needed */
+    width: 330px;
     height: 120px;
     display: block; /* Make the buttons appear below each other */
     margin-top: 20px;
@@ -40,9 +40,9 @@
     margin-bottom: 0px; 
     height: 400px;
     overflow: scroll;
+    position: relative;
 }
 
-/* Add a background color on hover */
 .gamble-options button:hover {
     transform: scale(1.05, 1.05);
 }
@@ -71,4 +71,11 @@
 
 .gameble_place{
     overflow: hidden;
+}
+
+#score{
+    color: red;
+    font-size: 50;
+    font-weight: bold;
+    text-align: center;
 }

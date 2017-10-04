@@ -8,6 +8,7 @@ var selectedOption = 0;
 var curAnswer = 0;
 var answerMatched = false;
 var GMmode = false;
+var curScore = 0;
 
 var prevNum = 0;
 var prevKey = null;
@@ -224,13 +225,16 @@ dbRefAdvice.on('value', function (snapchat){
             alert("YOU WIN!!!");
             // $(".modal-body").text("Your advice worked!!!");
             // $("#myModal").modal("show");
+            curScore++;
             answerMatched = false;
             refreshGamble();
+            
         } else if(!snapchat.exists() && !answerMatched) {
             alert("New round started!");
             // $(".modal-body").text("Your advice was ignored...");
             // $("#myModal").modal("show");
             refreshGamble();
         }
+        $("#score").text("Score: "+curScore);
     }
 });
