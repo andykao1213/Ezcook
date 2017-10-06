@@ -232,10 +232,11 @@ dbRefCounting.on('value', function (snapchat){
             startCountDown();
             console.log("answer match!");
             setTimeout(function(){
+                curScore++;
                 alert("YOU WIN!!!");
                 answerMatched = false;
                 refreshGamble();  
-            }, delay*1000);          
+            }, delay*1000);
         } else if(snapchat.val() == true && !answerMatched) {
             startCountDown();
             console.log("answer wrong!");
