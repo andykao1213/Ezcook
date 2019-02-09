@@ -62,6 +62,7 @@ function getInput(){
 }
 
 // make the subtitle move
+//Check the span tag every 0.025sec, let it move left by 2px
 timer = setInterval(move, 25);
 function move(){
   var arr = [];
@@ -79,20 +80,28 @@ function move(){
 
 //add the barage to the video
 function addBarage(input){
-  var index = parseInt(Math.random() * 7);
+
+  // create new span 
+  var span = document.createElement('span');
+
+  // determine the span position in the barage area
   var screenW = 560;
   var screenH = 150;
   var max = Math.floor(screenH / 40);
   var height = 40 + 40 * (parseInt(Math.random() * (max+1)) - 1);
-  var span = document.createElement('span');
   span.style.left = screenW + 'px';
   span.style.top = height + 'px';
+
+  // pick a color randomly
+  var index = parseInt(Math.random() * 7); 
   span.style.color = colors[index];
-  //span.style.fontSize = 30px;
+
+  // assigne the sapn value
   span.innerHTML = input;
+
+  // add the span to barage area
   var dmDom = document.getElementById('dm');
   dmDom.appendChild(span);
-  //console.log('addbarage!!');
 }
 
 // Refresh the comments
@@ -107,7 +116,7 @@ $('#send').click(function(){
   getInput();
 });
 $('#example-text-input').keypress(function (e) {
-  code = (e.keyCode? e.keyCode : e.which);
+  code = (e.keyCode? e.keyCode : e.which); // some browser doesn't support keycode
   if(code == 13){
     getInput();
   }

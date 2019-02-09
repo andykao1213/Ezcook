@@ -29,8 +29,9 @@ $('#add').click(function(){
         newAdvice.set({
             content: input,
             user: userID.ID,
-            like: 10
+            like: 10    // We want to pretend that there are several user online, so we initial the likes at number of 10.
         });
+        // Get the time while users send the advices.
         var date = new Date();
         var nowTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
         var dbRefuserAdvice = firebase.database().ref('userLog/'+userID.ID+'/').child('advices');
@@ -40,7 +41,8 @@ $('#add').click(function(){
           time: nowTime
         });
     }
-    focusOption(optionCounter-1); //focus new advice immediately
+    // Something need to do when clicking the advice
+    focusOption(optionCounter-1); 
     $('.gamble-options').scrollTop(1000);
 });
 
@@ -51,8 +53,8 @@ dbRefAdvice.on('child_added', function (snapchat) {
     // get input from firebase
     var input = snapchat.val().content;
     var btn = $("<button></button>");
-    //console.log(input);
 
+    // add new DOM element
     btn.attr("id", "btn" + optionCounter);
     btn.attr("onclick", "focusOption(" + optionCounter + ")");
     $(".gamble-options").append(btn);  
@@ -63,9 +65,10 @@ dbRefAdvice.on('child_added', function (snapchat) {
     if(input != null)
         $('#btn'+(optionCounter-1)).append(txt);
 
-
+    // Get number of likes from firebase
     firebase.database().ref('advices/advice/'+ snapchat.key + '/').child('like').once('value', function (snapchat) {
         var likeCount = snapchat.val();
+        // add like element to DOM
         var like = $("<div></div>").text('❤ ' + likeCount);
         like.attr("class", "like");
         like.attr("id", "like"+(optionCounter-1));
@@ -76,12 +79,11 @@ dbRefAdvice.on('child_added', function (snapchat) {
     optionKey.push(snapchat.key);
     var mykey = snapchat.key;
 
-    // add listener
+    // add listener, when number of like increase, refresh
     firebase.database().ref('advices/advice/'+ snapchat.key + '/').child('like').on('value', function (snapchat) {
         var likeCount = snapchat.val();
         var index = optionKey.indexOf(mykey);
         $('#like'+(index+1)).text('❤ ' + likeCount);
-        console.log("index: "+index);
     });  
 });
 
@@ -93,6 +95,8 @@ function focusOption(num){
         newAnswer.set({
             content: num
         });
+
+        // After novice select the answer, count 10 seconds then publish the answer.
         dbRefCounting.set(true);
         setTimeout(function(){
             dbRefAdvice.remove();
@@ -101,7 +105,7 @@ function focusOption(num){
         }, 10000);
         
     } else {
-            // reset all gamble options
+        // reset all gamble options
         $(".gamble-options button").css("border", "0.5px solid rgba(252, 252, 252, 0.90)");
         // add red border to selected option
         $("#btn"+num).css("border", "2px solid red");
@@ -111,10 +115,13 @@ function focusOption(num){
            if(num != prevNum){
                selectedOption = num; //use selctedOption to record current chosen answer
 
+               // We want to pretend that there are many users
                likeCount += Math.floor((Math.random() * 5) + 1);
 
+               // Update new number of like to firebase
                firebase.database().ref('advices/advice/'+ optionKey[num-1] + '/').child('like').set(likeCount);
-                if(prevKey != null){
+               // Lessen the previous count 
+               if(prevKey != null){
                     firebase.database().ref('advices/advice/' + prevKey + '/').child('like').once('value', function (snapchat) {
                     var count = snapchat.val();
                     console.log('prev like is '+count);
@@ -123,8 +130,7 @@ function focusOption(num){
                         firebase.database().ref('advices/advice/'+ prevKey + '/').child('like').set(count);
                     });
                 }
-                console.log('prevKey is '+prevKey);
-                console.log('preNum is '+prevNum);
+                
                 prevKey = optionKey[num-1];
                 prevNum = num;
 
@@ -145,8 +151,7 @@ function focusOption(num){
                                 firebase.database().ref('advices/advice/'+ prevKey + '/').child('like').set(count);
                         });
                     }
-                    console.log('prevKey is '+prevKey);
-                    console.log('preNum is '+prevNum);
+                    
                     prevKey = null;
                     prevNum = num;
                }
